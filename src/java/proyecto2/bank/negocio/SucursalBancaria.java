@@ -13,15 +13,15 @@ import java.util.List;
  */
 public class SucursalBancaria {
     
-    private int IdSucursalBancaria;
-    private String CodigoEntidad;
-    private String Nombre;
+    private int idSucursalBancaria;
+    private String codigoEntidad;
+    private String nombre;
     private EntidadBancaria entidadBancaria;
 
     public SucursalBancaria(int IdSucursalBancaria, String CodigoEntidad, String Nombre, EntidadBancaria entidadBancaria) {
-        this.IdSucursalBancaria = IdSucursalBancaria;
-        this.CodigoEntidad = CodigoEntidad;
-        this.Nombre = Nombre;
+        this.idSucursalBancaria = IdSucursalBancaria;
+        this.codigoEntidad = CodigoEntidad;
+        this.nombre = Nombre;
         this.entidadBancaria = entidadBancaria;
     }
 
@@ -29,27 +29,27 @@ public class SucursalBancaria {
     }
 
     public int getIdSucursalBancaria() {
-        return IdSucursalBancaria;
+        return idSucursalBancaria;
     }
 
     public void setIdSucursalBancaria(int IdSucursalBancaria) {
-        this.IdSucursalBancaria = IdSucursalBancaria;
+        this.idSucursalBancaria = idSucursalBancaria;
     }
 
     public String getCodigoEntidad() {
-        return CodigoEntidad;
+        return codigoEntidad;
     }
 
     public void setCodigoEntidad(String CodigoEntidad) {
-        this.CodigoEntidad = CodigoEntidad;
+        this.codigoEntidad = codigoEntidad;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        this.nombre = Nombre;
     }
 
     public EntidadBancaria getEntidadBancaria() {
