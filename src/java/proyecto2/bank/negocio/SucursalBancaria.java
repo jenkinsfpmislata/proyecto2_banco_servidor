@@ -14,42 +14,32 @@ import java.util.List;
 public class SucursalBancaria {
     
     private int idSucursalBancaria;
-    private String codigoEntidad;
-    private String nombre;
+    private String codigoSucursalBancaria;
+    private String nombreSucursalBancaria;
     private EntidadBancaria entidadBancaria;
-
-    public SucursalBancaria(int IdSucursalBancaria, String CodigoEntidad, String Nombre, EntidadBancaria entidadBancaria) {
-        this.idSucursalBancaria = IdSucursalBancaria;
-        this.codigoEntidad = CodigoEntidad;
-        this.nombre = Nombre;
-        this.entidadBancaria = entidadBancaria;
-    }
-
-    public SucursalBancaria() {
-    }
 
     public int getIdSucursalBancaria() {
         return idSucursalBancaria;
     }
 
-    public void setIdSucursalBancaria(int IdSucursalBancaria) {
+    public void setIdSucursalBancaria(int idSucursalBancaria) {
         this.idSucursalBancaria = idSucursalBancaria;
     }
 
-    public String getCodigoEntidad() {
-        return codigoEntidad;
+    public String getCodigoSucursalBancaria() {
+        return codigoSucursalBancaria;
     }
 
-    public void setCodigoEntidad(String CodigoEntidad) {
-        this.codigoEntidad = codigoEntidad;
+    public void setCodigoSucursalBancaria(String codigoSucursalBancaria) {
+        this.codigoSucursalBancaria = codigoSucursalBancaria;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreSucursalBancaria() {
+        return nombreSucursalBancaria;
     }
 
-    public void setNombre(String Nombre) {
-        this.nombre = Nombre;
+    public void setNombreSucursalBancaria(String nombreSucursalBancaria) {
+        this.nombreSucursalBancaria = nombreSucursalBancaria;
     }
 
     public EntidadBancaria getEntidadBancaria() {
@@ -59,6 +49,20 @@ public class SucursalBancaria {
     public void setEntidadBancaria(EntidadBancaria entidadBancaria) {
         this.entidadBancaria = entidadBancaria;
     }
+
+    public SucursalBancaria() {
+    }
+
+    public SucursalBancaria(int idSucursalBancaria, String codigoSucursalBancaria, String nombreSucursalBancaria, EntidadBancaria entidadBancaria) {
+        this.idSucursalBancaria = idSucursalBancaria;
+        this.codigoSucursalBancaria = codigoSucursalBancaria;
+        this.nombreSucursalBancaria = nombreSucursalBancaria;
+        this.entidadBancaria = entidadBancaria;
+    }
+
+   
+
+   
   
     
 }
