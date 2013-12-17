@@ -1,2 +1,15 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/Bank_Server"/>
+<Context antiJARLocking="true" path="/DaIgual">
+<Resource name="jdbc/Banco" 
+          type="javax.sql.DataSource"
+          removeAbandoned="true"
+          removeAbandonedTimeout="30" 
+          maxActive="50"
+          maxIdle="2" 
+          maxWait="100" 
+          username="banco"
+          password="banco"
+          driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/Banco"/>
+</Context>

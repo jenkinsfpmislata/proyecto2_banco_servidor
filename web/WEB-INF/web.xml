@@ -12,13 +12,13 @@
     
     <listener>
         <listener-class>
-            com.fpmislata.banco.datos.HibernateContextListenerAndFilter
+            proyecto2.bank.datos.HibernateContextListenerAndFilter
         </listener-class>
     </listener>
     
     <filter>
         <filter-name>HibernateContextListenerAndFilter</filter-name>
-        <filter-class>com.fpmislata.banco.datos.HibernateContextListenerAndFilter</filter-class>
+        <filter-class>proyecto2.bank.datos.HibernateContextListenerAndFilter</filter-class>
     </filter>
     
     <filter-mapping>
