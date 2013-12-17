@@ -3,7 +3,7 @@
   <hibernate-mapping>
     <class name="proyecto2.bank.negocio.CuentaBancaria" table="cuentabancaria" >
       <id column="idCuentaBancaria" name="idCuentaBancaria" type="integer"/>
-      <property name="SucursalBancaria" />
+      <property name="sucursalBancaria" column="SucursalBancaria"/>
       <property name="numeroCuenta" />
       <property name="dC" />
       <property name="saldo" />
