@@ -26,9 +26,11 @@
        <% for(SucursalBancaria sucursal: sucursalesBancarias){%>
        <tr class="success">
         <td><%=sucursal.getIdSucursalBancaria()%></td>
-        <td><%=entidad.getCodigoEntidad()%></td>
-        <td><%=entidad.getNombre()%></td>
-        <td><%=entidad.getCif()%></td>
-        <td><%=entidad.getEntidad()%></td>
+        <td><%=sucursal.getCodigoSucursalBancaria()%></td>
+        <td><%=sucursal.getNombreSucursalBancaria()%></td>
+        </tr>        
+     <%  }
+        %>
+        </table>
     </body>
 </html>
