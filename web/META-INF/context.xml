@@ -1,6 +1,5 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/DaIgual">
+<Context antiJARLocking="true" path="/Bank_Server">
 <Resource name="jdbc/Banco" 
           type="javax.sql.DataSource"
           removeAbandoned="true"

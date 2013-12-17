@@ -13,13 +13,29 @@ import java.util.Date;
  */
 public class MovimientoBancario {
 
-    private int idMovimientoBancario;           //La PK del movimiento bancario 
-    private TipoMovimientoBancario tipoMovimientoBancario;
-    private BigDecimal importe;                           //El importe del movimiento (el dinero) 
-    private Date fecha;                             //La fecha del movimiento 
-    private BigDecimal saldoTotal;  // El saldo en la cuenta tras efectuar el 
-    private String concepto;
+
     private CuentaBancaria cuentaBancaria;
+    
+    private int idMovimientoBancario;
+    private TipoMovimientoBancario tipoMovimientoBancario;
+    private BigDecimal importe;
+    private Date fecha;
+    private BigDecimal saldoTotal;
+    private String concepto;
+
+    public MovimientoBancario() {
+    }
+
+    public MovimientoBancario(int idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, BigDecimal importe, Date fecha, BigDecimal saldoTotal, String concepto, CuentaBancaria cuentaBancaria) {
+        this.idMovimientoBancario = idMovimientoBancario;
+        this.tipoMovimientoBancario = tipoMovimientoBancario;
+        this.importe = importe;
+        this.fecha = fecha;
+        this.saldoTotal = saldoTotal;
+        this.concepto = concepto;
+        this.cuentaBancaria = cuentaBancaria;
+    
+    }
 
     public int getIdMovimientoBancario() {
         return idMovimientoBancario;
@@ -68,4 +84,13 @@ public class MovimientoBancario {
     public void setConcepto(String concepto) {
         this.concepto = concepto;
     }
+
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
+    
 }

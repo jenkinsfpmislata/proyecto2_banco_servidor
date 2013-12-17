@@ -7,5 +7,8 @@
         <property name="hibernate.show_sql">true</property>
 
         <mapping resource="proyecto2/bank/datos/EntidadBancaria.hbm.xml"/>
+        <mapping resource="proyecto2/bank/datos/SucursalBancaria.hbm.xml"/>
+        <mapping resource="proyecto2/bank/datos/MovimientoBancario.hbm.xml"/>
+        <mapping resource="proyecto2/bank/datos/CuentaBancaria.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
