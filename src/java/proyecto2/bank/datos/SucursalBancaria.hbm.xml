@@ -4,8 +4,8 @@
     <class name="proyecto2.bank.negocio.SucursalBancaria" table="sucursalbancaria" >
         <id column="idSucursalBancaria" name="idSucursalBancaria" type="integer"/>
         <property name="entidadBancaria" />
-        <property name="CodigoSucursal" />
-        <property name="nombre" />
+        <property name="codigoSucursalBancaria" />
+        <property name="nombreSucursalBancaria" />
 
     </class>
 </hibernate-mapping>

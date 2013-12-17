@@ -18,26 +18,25 @@ public class SucursalBancariaDAOImplHibernate extends GenericDAOImplHibernate<Su
 
     @Override
     public List<SucursalBancaria> findByCodigo(String codigoSucursal) {
-        Session session=sessionFactory.getCurrentSession();
-       Query query = session.createQuery("SELECT sb FROM SucursalBancaria sb where codigoSucursal= ?");
-       query.setString(0, codigoSucursal);
-       List<SucursalBancaria> listaporCodigo = query.list();
-        
-       return listaporCodigo;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT sb FROM SucursalBancaria sb where codigoSucursal= ?");
+        query.setString(0, codigoSucursal);
+        List<SucursalBancaria> listaporCodigo = query.list();
+
+        return listaporCodigo;
     }
 
     @Override
     public List<SucursalBancaria> findByNombre(String Nombre) {
-         Session session=sessionFactory.getCurrentSession();
-       Query query = session.createQuery("SELECT sb FROM SucursalBancaria sb where nombre like ?");
-       query.setString(0,"%"+Nombre+"%");
-       List<SucursalBancaria> listaporNombre = query.list();
-        if((Nombre == null)||(Nombre.trim().equals(""))){
-           listaporNombre=findAll();
-           
-       }
-       
-       return listaporNombre;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT sb FROM SucursalBancaria sb where nombre like ?");
+        query.setString(0, "%" + Nombre + "%");
+        List<SucursalBancaria> listaporNombre = query.list();
+        if ((Nombre == null) || (Nombre.trim().equals(""))) {
+            listaporNombre = findAll();
+
+        }
+
+        return listaporNombre;
     }
-    
 }
