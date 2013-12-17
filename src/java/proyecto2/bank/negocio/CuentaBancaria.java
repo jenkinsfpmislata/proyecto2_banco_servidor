@@ -4,6 +4,7 @@
  */
 package proyecto2.bank.negocio;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +13,14 @@ import java.util.List;
  * @author alumno
  */
 public class CuentaBancaria {
-      private int idCuentaBancaria;
-private SucursalBancaria sucursalBancaria;
- private int numeroCuenta;
- private int dc; //El dígito de control de la cuenta bancaria 
-private int saldo; //El saldo de la cuenta.Es decir cuanto dinero hay en la cuenta 
-private String cif;
 
-private List<MovimientoBancario> listaMovimiento = new ArrayList<MovimientoBancario>();
+    private int idCuentaBancaria;
+    private SucursalBancaria sucursalBancaria;
+    private int numeroCuenta;
+    private int dc; //El dígito de control de la cuenta bancaria 
+    private BigDecimal saldo; //El saldo de la cuenta.Es decir cuanto dinero hay en la cuenta 
+    private String cif;
+    private List<MovimientoBancario> listaMovimiento = new ArrayList<MovimientoBancario>();
 
     public int getIdCuentaBancaria() {
         return idCuentaBancaria;
@@ -53,11 +54,11 @@ private List<MovimientoBancario> listaMovimiento = new ArrayList<MovimientoBanca
         this.dc = dc;
     }
 
-    public int getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 
@@ -68,11 +69,6 @@ private List<MovimientoBancario> listaMovimiento = new ArrayList<MovimientoBanca
     public void setCif(String cif) {
         this.cif = cif;
     }
-      public void anyadirMovimiento(MovimientoBancario mov){
-    listaMovimiento.add(mov);
-       
-    
-    }
 
     public List<MovimientoBancario> getListaMovimiento() {
         return listaMovimiento;
@@ -81,8 +77,4 @@ private List<MovimientoBancario> listaMovimiento = new ArrayList<MovimientoBanca
     public void setListaMovimiento(List<MovimientoBancario> listaMovimiento) {
         this.listaMovimiento = listaMovimiento;
     }
-      
-
-
-    
 }
