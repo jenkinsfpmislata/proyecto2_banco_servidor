@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="proyecto2.bank.negocio.EntidadBancaria" table="entidadbancaria" >
+        <id column="idEntidad" name="idEntidadBancaria" type="integer"/>
+        <property name="codigoEntidadBancaria" />
+        <property name="nombreEntidadBancaria" />
+        <property name="cifEntidadBancaria" />  
+        <property name="tipoEntidadBancaria" >
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">proyecto2.bank.negocio.TipoEntidadBancaria</param>
+                <param name="type">12</param>
+            </type>
+        </property>      
+    </class>
+</hibernate-mapping>
