@@ -22,9 +22,9 @@
         <url-pattern>*.jsp</url-pattern>
     </filter-mapping>   
 
-  <!--  <listener>
+    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>-->
+    </listener>
    
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -47,4 +47,4 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
-    </web-app>
+</web-app>
