@@ -20,7 +20,20 @@ public class CuentaBancaria {
     private int dc; //El dígito de control de la cuenta bancaria 
     private BigDecimal saldo; //El saldo de la cuenta.Es decir cuanto dinero hay en la cuenta 
     private String cif;
-    private List<MovimientoBancario> listaMovimiento = new ArrayList<MovimientoBancario>();
+    private List<MovimientoBancario> listaMovimiento = new ArrayList<>();
+
+    public CuentaBancaria() {
+    }
+
+    public CuentaBancaria(int idCuentaBancaria, SucursalBancaria sucursalBancaria, int numeroCuenta, int dc, BigDecimal saldo, String cif) {
+        this.idCuentaBancaria = idCuentaBancaria;
+        this.sucursalBancaria = sucursalBancaria;
+        this.numeroCuenta = numeroCuenta;
+        this.dc = dc;
+        this.saldo = saldo;
+        this.cif = cif;
+    }
+    
 
     public int getIdCuentaBancaria() {
         return idCuentaBancaria;

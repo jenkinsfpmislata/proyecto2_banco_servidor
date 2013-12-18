@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.fpmislata.banco.MovimientoBancario" table="movimientobancario" >
+    <class name="proyecto2.bank.negocio.MovimientoBancario" table="movimientobancario" >
         <id column="idMovimientoBancario" name="idMovimientoBancario" type="integer"/>
-        
-        <property name="tipoMovimientoBancario" >
+        <property name="tipoMovimientoBancario" column="tipoMovimientoBancario">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">com.fpmislata.banco.TipoMovimientoBancario</param>
+                <param name="enumClass">proyecto2.bank.negocio.TipoMovimientoBancario</param>
                 <param name="type">12</param>
             </type>
         </property>
-        
-        <property name="importe" />
-        <property name="fecha" />
-        <property name="saldoTotal" />
-        <property name="concepto" />
-      
+        <property name="importe" type="big_decimal"/>
+        <property name="fecha" type="date"/>
+        <property name="saldoTotal" type="big_decimal"/>
+        <property name="concepto"/>
     </class>
 </hibernate-mapping>

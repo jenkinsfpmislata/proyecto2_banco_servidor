@@ -9,6 +9,5 @@ package proyecto2.bank.negocio;
  * @author alumno
  */
 public enum TipoMovimientoBancario {
-
     DEBE, HABER
 }

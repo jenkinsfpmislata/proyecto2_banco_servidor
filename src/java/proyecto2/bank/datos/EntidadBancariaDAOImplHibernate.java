@@ -13,7 +13,7 @@ import proyecto2.bank.negocio.EntidadBancaria;
  *
  * @author alumno
  */
-public class EntidadBancariaImplHibernate extends GenericDAOImplHibernate<EntidadBancaria, Integer> implements EntidadBancariaDAO {
+public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<EntidadBancaria, Integer> implements EntidadBancariaDAO {
         @Override
     public List<EntidadBancaria> findByCodigo(String codigo) {
         Session session = sessionFactory.getCurrentSession();

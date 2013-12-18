@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-  <hibernate-mapping>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
     <class name="proyecto2.bank.negocio.CuentaBancaria" table="cuentabancaria" >
-      <id column="idCuentaBancaria" name="idCuentaBancaria" type="integer"/>
-      <property name="sucursalBancaria" column="SucursalBancaria"/>
-      <property name="numeroCuenta" />
-      <property name="dC" />
-      <property name="saldo" />
-      <property name="cif" />
-     </class>
- </hibernate-mapping>
+        <id column="idcuentabancaria" name="idCuentaBancaria" type="integer"/>
+        <property name="numeroCuenta"/>
+        <property name="dc" />
+        <property name="saldo" type="big_decimal"/>
+        <property name="cif"/>
+    </class>
+</hibernate-mapping>

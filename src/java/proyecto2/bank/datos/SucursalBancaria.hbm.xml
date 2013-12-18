@@ -2,10 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="proyecto2.bank.negocio.SucursalBancaria" table="sucursalbancaria" >
-        <id column="idSucursalBancaria" name="idSucursalBancaria" type="integer"/>
-        <property name="entidadBancaria" />
-        <property name="codigoSucursalBancaria" />
-        <property name="nombreSucursalBancaria" />
-
+        <id column="idSucursal" name="idSucursalBancaria" type="integer"/>
+        <property name="codigoSucursalBancaria" column="codigoSucursal" />
+        <property name="nombreSucursalBancaria" column="nombre"/>
     </class>
 </hibernate-mapping>
