@@ -8,7 +8,7 @@
           maxIdle="2" 
           maxWait="100" 
           username="root"
-          password="root"
+          password="frodo2013"
           driverClassName="com.mysql.jdbc.Driver"
           url="jdbc:mysql://localhost:3306/proyecto2_banco"
           validationQuery="SELECT 1 FROM dual"
