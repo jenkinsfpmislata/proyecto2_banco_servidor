@@ -11,5 +11,6 @@
           password="root"
           driverClassName="com.mysql.jdbc.Driver"
           url="jdbc:mysql://localhost:3306/Banco"
-          validationQuery="SELECT 1 FROM dual"/>       
+          validationQuery="SELECT 1 FROM dual"
+          factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory"/>       
 </Context>
