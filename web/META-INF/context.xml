@@ -10,7 +10,7 @@
           username="root"
           password="frodo2013"
           driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://localhost:3306/proyecto2_banco"
+          url="jdbc:mysql://localhost:3306/proyecto2_banco?autoReconnect=true"
           validationQuery="SELECT 1 FROM dual"
           factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"/>       
 </Context>
