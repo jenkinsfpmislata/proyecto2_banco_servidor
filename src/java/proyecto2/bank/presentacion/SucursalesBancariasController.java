@@ -72,9 +72,9 @@ public class SucursalesBancariasController {
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<SucursalBancaria> sucursalesBancarias = null;
-            String numeroSucursalBancaria = httpServletRequest.getParameter("numeroSucursalBancaria");
-            if (numeroSucursalBancaria != null) {
-                sucursalesBancarias = sucursalBancariaDAO.findByCodigo(numeroSucursalBancaria);
+            String nombreSucursalBancaria = httpServletRequest.getParameter("nombreSucursalBancaria");
+            if (nombreSucursalBancaria != null) {
+                sucursalesBancarias = sucursalBancariaDAO.findByNombre(nombreSucursalBancaria);
             } else {
                 sucursalesBancarias = sucursalBancariaDAO.findAll();
             }
