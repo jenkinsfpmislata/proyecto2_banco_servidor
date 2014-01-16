@@ -71,7 +71,13 @@ public class SucursalesBancariasController {
     @RequestMapping(value = {"/SucursalBancaria"}, method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            List<SucursalBancaria> sucursalesBancarias = sucursalBancariaDAO.findAll();
+            List<SucursalBancaria> sucursalesBancarias = null;
+            String numeroSucursalBancaria = httpServletRequest.getParameter("numeroSucursalBancaria");
+            if (numeroSucursalBancaria != null) {
+                sucursalesBancarias = sucursalBancariaDAO.findByCodigo(numeroSucursalBancaria);
+            } else {
+                sucursalesBancarias = sucursalBancariaDAO.findAll();
+            }
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
