@@ -75,7 +75,13 @@ public class EntidadBancariaController {
     @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findAll();
+            List<EntidadBancaria> entidadesBancarias = null;
+            String nombreEntidadBancaria = httpServletRequest.getParameter("nombreEntidadBancaria"); 
+            if (nombreEntidadBancaria != null) {
+                entidadesBancarias = entidadBancariaDAO.findByNombre(nombreEntidadBancaria);
+            } else {
+                entidadesBancarias = entidadBancariaDAO.findAll();
+            }
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
