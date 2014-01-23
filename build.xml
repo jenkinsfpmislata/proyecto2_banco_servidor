@@ -147,7 +147,7 @@ datasource.datos.factory El valor del atributo factory del datasource. Por defec
         <echo>Fichero de configuración:${proyecto.productionFile}</echo>
 
         <!-- propiedades del entorno de producción -->
-        <property file="/home/jenkins/enviroments/proyecto2/proyecto2_Bank_Client_properties.txt" />
+        <property file="/home/jenkins/environments/proyecto2/proyecto2_Bank_Client_properties.txt" />
         <!--
 OJO:siempre despues de cargar el fichero de propiedades
 Pq al ser las propiedades inmutables, si no tiene valor se pone por defecto.
