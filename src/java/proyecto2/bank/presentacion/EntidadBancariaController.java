@@ -40,6 +40,7 @@ public class EntidadBancariaController {
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
         try {
             EntidadBancaria entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -47,6 +48,7 @@ public class EntidadBancariaController {
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
@@ -61,8 +63,10 @@ public class EntidadBancariaController {
         try {
             entidadBancariaDAO.delete(idEntidadBancaria);
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            noCache(httpServletResponse);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
@@ -82,6 +86,7 @@ public class EntidadBancariaController {
             } else {
                 entidadesBancarias = entidadBancariaDAO.findAll();
             }
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -89,6 +94,7 @@ public class EntidadBancariaController {
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
@@ -104,6 +110,7 @@ public class EntidadBancariaController {
         try {
             EntidadBancaria entidadBancaria = (EntidadBancaria) objectMapper.readValue(json, EntidadBancaria.class);
             entidadBancariaDAO.insert(entidadBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             json = objectMapper.writeValueAsString(entidadBancaria);
             httpServletResponse.getWriter().println(json);
@@ -115,6 +122,7 @@ public class EntidadBancariaController {
                 listaBussinessMessages.add(bussinessMessage);
             }
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             json = objectMapper.writeValueAsString(listaBussinessMessages);
             try {
@@ -123,6 +131,7 @@ public class EntidadBancariaController {
             }
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
@@ -146,6 +155,7 @@ public class EntidadBancariaController {
             entidadBancaria.setTipoEntidadBancaria(entidadBancariaActualizada.getTipoEntidadBancaria());
 
             entidadBancariaDAO.update(entidadBancaria);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
 
@@ -153,11 +163,16 @@ public class EntidadBancariaController {
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
             }
         }
+    }
+    
+    private void noCache(HttpServletResponse httpServletResponse){
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
     }
 }
