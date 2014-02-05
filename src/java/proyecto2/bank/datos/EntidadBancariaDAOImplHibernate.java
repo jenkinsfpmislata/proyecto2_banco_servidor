@@ -14,7 +14,8 @@ import proyecto2.bank.negocio.EntidadBancaria;
  * @author alumno
  */
 public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<EntidadBancaria, Integer> implements EntidadBancariaDAO {
-        @Override
+
+    @Override
     public List<EntidadBancaria> findByCodigo(String codigo) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT eb FROM EntidadBancaria eb WHERE codigoEntidad= ?");
