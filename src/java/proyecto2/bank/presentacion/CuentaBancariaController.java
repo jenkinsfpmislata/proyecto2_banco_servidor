@@ -28,12 +28,12 @@ import proyecto2.bank.negocio.CuentaBancaria;
 public class CuentaBancariaController {
     
     @Autowired
-    CuentaBancariaDAO cuentaBancariadao;
+    CuentaBancariaDAO cuentaBancariaDAO;
     
     @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.GET, produces = "application/json")
      public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
-            CuentaBancaria entidadBancaria = cuentaBancariadao.read(idCuentaBancaria);
+            CuentaBancaria entidadBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -52,7 +52,7 @@ public class CuentaBancariaController {
     @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
-            cuentaBancariadao.delete(idCuentaBancaria);
+            cuentaBancariaDAO.delete(idCuentaBancaria);
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -71,9 +71,9 @@ public class CuentaBancariaController {
             List<CuentaBancaria> cuentasBancarias = null;
             int numeroCuenta = Integer.parseInt( httpServletRequest.getParameter("numeroCuenta")); 
             if (numeroCuenta != 0) {
-                cuentasBancarias = cuentaBancariadao.findByNumero(numeroCuenta);
+                cuentasBancarias = cuentaBancariaDAO.findByNumero(numeroCuenta);
             } else {
-                cuentasBancarias = cuentaBancariadao.findAll();
+                cuentasBancarias = cuentaBancariaDAO.findAll();
             }
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
@@ -95,7 +95,7 @@ public class CuentaBancariaController {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         try {
             CuentaBancaria cuentaBancaria = (CuentaBancaria) objectMapper.readValue(json, CuentaBancaria.class);
-            cuentaBancariadao.insert(cuentaBancaria);
+            cuentaBancariaDAO.insert(cuentaBancaria);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             json = objectMapper.writeValueAsString(cuentaBancaria);
             httpServletResponse.getWriter().println(json);
@@ -125,7 +125,7 @@ public class CuentaBancariaController {
     @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) {
         try {
-            CuentaBancaria cuentaBancaria = cuentaBancariadao.read(idCuentaBancaria);
+            CuentaBancaria cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             CuentaBancaria cuentaBancariaActualizada = (CuentaBancaria) objectMapper.readValue(json, CuentaBancaria.class);
@@ -135,7 +135,7 @@ public class CuentaBancariaController {
             cuentaBancaria.setDc(cuentaBancariaActualizada.getDc());
             cuentaBancaria.setCif(cuentaBancariaActualizada.getCif());
 
-            cuentaBancariadao.update(cuentaBancaria);
+            cuentaBancariaDAO.update(cuentaBancaria);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
 
