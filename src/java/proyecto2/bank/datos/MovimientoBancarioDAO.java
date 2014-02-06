@@ -4,12 +4,16 @@
  */
 package proyecto2.bank.datos;
 
+import java.util.List;
 import proyecto2.bank.negocio.MovimientoBancario;
 
 /**
  *
  * @author alumno
  */
-public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, Integer>{
-    
+public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, Integer> {
+
+    List<MovimientoBancario> findById(int id);
+
+    List<MovimientoBancario> findByConcepto(String concepto);
 }
