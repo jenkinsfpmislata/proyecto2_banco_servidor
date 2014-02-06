@@ -64,13 +64,13 @@ public class CuentaBancariaController {
 
     }
     
-    @RequestMapping(value = {"/CuentaBancaria"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<CuentaBancaria> cuentasBancarias = null;
-            int numeroCuenta = Integer.parseInt( httpServletRequest.getParameter("numeroCuenta")); 
-            if (numeroCuenta != 0) {
-                cuentasBancarias = cuentaBancariaDAO.findByNumero(numeroCuenta);
+            int idCuentaBancaria = Integer.parseInt( httpServletRequest.getParameter("idCuentaBancaria")); 
+            if (idCuentaBancaria != 0) {
+                cuentasBancarias = cuentaBancariaDAO.findById(idCuentaBancaria);
             } else {
                 cuentasBancarias = cuentaBancariaDAO.findAll();
             }
