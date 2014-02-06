@@ -49,8 +49,8 @@ public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<Ent
         if (idEntidadBancaria == 0) {
             sucursalesBancarias = null;
         } else {
-            Query query = session.createQuery("SELECT eb FROM SucursalBancaria sb WHERE entidadBancaria =  ?");
-            query.setString(0, "idEntidadBancaria");
+            Query query = session.createQuery("SELECT sb FROM SucursalBancaria sb WHERE entidadBancaria LIKE  ?");
+            query.setInteger(0, idEntidadBancaria);
             sucursalesBancarias = query.list();
 
         }
