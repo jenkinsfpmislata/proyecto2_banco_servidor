@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import proyecto2.bank.datos.BussinessMessage;
 import proyecto2.bank.datos.EntidadBancariaDAO;
 import proyecto2.bank.negocio.EntidadBancaria;
+import proyecto2.bank.negocio.SucursalBancaria;
 
 /**
  *
@@ -80,7 +81,7 @@ public class EntidadBancariaController {
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<EntidadBancaria> entidadesBancarias = null;
-            String nombreEntidadBancaria = httpServletRequest.getParameter("nombreEntidadBancaria"); 
+            String nombreEntidadBancaria = httpServletRequest.getParameter("nombreEntidadBancaria");
             if (nombreEntidadBancaria != null) {
                 entidadesBancarias = entidadBancariaDAO.findByNombre(nombreEntidadBancaria);
             } else {
@@ -171,8 +172,35 @@ public class EntidadBancariaController {
             }
         }
     }
-    
-    private void noCache(HttpServletResponse httpServletResponse){
+
+    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}/SucursalesBancarias"}, method = RequestMethod.GET, produces = "application/json")
+    public void findSucursalesBancarias(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+        try {
+            List<SucursalBancaria> sucursalesBancarias = null;
+            if (idEntidadBancaria != 0) {
+                sucursalesBancarias = entidadBancariaDAO.findBySucursal(idEntidadBancaria);
+            } else {
+                sucursalesBancarias = null;
+            }
+            noCache(httpServletResponse);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.setStatus(httpServletResponse.SC_OK);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(sucursalesBancarias);
+            httpServletResponse.getWriter().println(json);
+        } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex1) {
+            }
+        }
+
+    }
+
+    private void noCache(HttpServletResponse httpServletResponse) {
         httpServletResponse.setHeader("Cache-Control", "no-cache");
     }
 }

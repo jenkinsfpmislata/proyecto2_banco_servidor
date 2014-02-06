@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import proyecto2.bank.negocio.EntidadBancaria;
+import proyecto2.bank.negocio.SucursalBancaria;
 
 /**
  *
@@ -38,5 +39,21 @@ public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<Ent
 
         }
         return entidadesBancarias;
+    }
+
+    @Override
+    public List<SucursalBancaria> findBySucursal(int idEntidadBancaria) {
+        Session session = sessionFactory.getCurrentSession();
+        List<SucursalBancaria> sucursalesBancarias;
+
+        if (idEntidadBancaria == 0) {
+            sucursalesBancarias = null;
+        } else {
+            Query query = session.createQuery("SELECT eb FROM SucursalBancaria sb WHERE entidadBancaria =  ?");
+            query.setString(0, "idEntidadBancaria");
+            sucursalesBancarias = query.list();
+
+        }
+        return sucursalesBancarias;
     }
 }

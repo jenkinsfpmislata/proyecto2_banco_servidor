@@ -19,7 +19,7 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
     public List<CuentaBancaria> findById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE idcuentabancaria= ?");
-        query.setInteger(null, id);
+        query.setInteger(0, id);
         List<CuentaBancaria> cuentasBancarias = query.list();
         return cuentasBancarias;
     }

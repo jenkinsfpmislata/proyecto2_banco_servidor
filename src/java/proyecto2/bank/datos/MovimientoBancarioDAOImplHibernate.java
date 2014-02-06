@@ -22,7 +22,7 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
     public List<MovimientoBancario> findById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE idmovimientobancario= ?");
-        query.setInteger(null, id);
+        query.setInteger(0, id);
         List<MovimientoBancario> movimientosBancarios = query.list();
         return movimientosBancarios;
     }
