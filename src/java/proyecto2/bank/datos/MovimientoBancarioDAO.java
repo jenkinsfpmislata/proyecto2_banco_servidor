@@ -13,7 +13,7 @@ import proyecto2.bank.negocio.MovimientoBancario;
  */
 public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, Integer> {
 
-    List<MovimientoBancario> findById(int id);
+    List<MovimientoBancario> findById(String id);
 
     List<MovimientoBancario> findByConcepto(String concepto);
 }

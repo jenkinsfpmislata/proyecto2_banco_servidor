@@ -57,30 +57,14 @@ public class MovimientoBancarioController {
 
     }
 
-    @RequestMapping(value = {"/MovimientoBancario/{idMovimientoBancario}"}, method = RequestMethod.DELETE)
-    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
-        try {
-            movimientoBancarioDAO.delete(idMovimientoBancario);
-            httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            noCache(httpServletResponse);
-        } catch (Exception ex) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            noCache(httpServletResponse);
-            httpServletResponse.setContentType("text/plain; charset=UTF-8");
-            try {
-                ex.printStackTrace(httpServletResponse.getWriter());
-            } catch (IOException ex1) {
-            }
-        }
 
-    }
      @RequestMapping(value = {"/MovimientoBancario"}, method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<MovimientoBancario> movimientosBancarios = null;
-            String concepto = httpServletRequest.getParameter("conceptoMovimiento"); 
-            if (concepto != null) {
-                movimientosBancarios = movimientoBancarioDAO.findByConcepto(concepto);
+            String id = httpServletRequest.getParameter("idMovimiento"); 
+            if (id != null) {
+                movimientosBancarios = movimientoBancarioDAO.findById(id);
             } else {
                 movimientosBancarios = movimientoBancarioDAO.findAll();
             }
@@ -139,39 +123,7 @@ public class MovimientoBancarioController {
 
     }
      
-      @RequestMapping(value = {"/MovimientoBancario/{idMovimientoBancario}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario, @RequestBody String json) {
-        try {
-            MovimientoBancario movimientoBancario = movimientoBancarioDAO.read(idMovimientoBancario);
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-            MovimientoBancario movimientoBancarioActualizado = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
-
-            movimientoBancario.setIdMovimientoBancario(movimientoBancarioActualizado.getIdMovimientoBancario());
-            movimientoBancario.setFecha(movimientoBancarioActualizado.getFecha());
-            movimientoBancario.setConcepto(movimientoBancarioActualizado.getConcepto());
-            movimientoBancario.setImporte(movimientoBancarioActualizado.getImporte());
-            movimientoBancario.setSaldoTotal(movimientoBancarioActualizado.getSaldoTotal());
-            movimientoBancario.setTipoMovimientoBancario(movimientoBancarioActualizado.getTipoMovimientoBancario());
-            movimientoBancario.setCuentaBancaria(movimientoBancarioActualizado.getCuentaBancaria());
-
-            movimientoBancarioDAO.update(movimientoBancario);
-            noCache(httpServletResponse);
-            httpServletResponse.setContentType("application/json; charset=UTF-8");
-            httpServletResponse.setStatus(httpServletResponse.SC_OK);
-
-            json = objectMapper.writeValueAsString(movimientoBancario);
-            httpServletResponse.getWriter().println(json);
-        } catch (Exception ex) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            noCache(httpServletResponse);
-            httpServletResponse.setContentType("text/plain; charset=UTF-8");
-            try {
-                ex.printStackTrace(httpServletResponse.getWriter());
-            } catch (IOException ex1) {
-            }
-        }
-    }
+   
 
     private void noCache(HttpServletResponse httpServletResponse) {
         httpServletResponse.setHeader("Cache-Control", "no-cache");
