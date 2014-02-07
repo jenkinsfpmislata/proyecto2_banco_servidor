@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package proyecto2.bank.datos;
+
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,9 +15,7 @@ import proyecto2.bank.negocio.MovimientoBancario;
  *
  * @author alumno
  */
-
-
-public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<MovimientoBancario,Integer> implements MovimientoBancarioDAO{
+public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<MovimientoBancario, Integer> implements MovimientoBancarioDAO {
 
     @Override
     public List<MovimientoBancario> findById(int id) {
@@ -29,7 +28,7 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
 
     @Override
     public List<MovimientoBancario> findByConcepto(String concepto) {
-            Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         List<MovimientoBancario> movimientosBancarios;
 
         if (concepto == null || concepto.trim().equals("")) {
@@ -42,8 +41,4 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
         }
         return movimientosBancarios;
     }
-    }
-
-
-    
-
+}
