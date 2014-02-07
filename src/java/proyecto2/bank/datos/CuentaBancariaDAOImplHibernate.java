@@ -25,15 +25,15 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
     }
 
     @Override
-    public List<CuentaBancaria> findByNumero(int numero) {
+    public List<CuentaBancaria> findByNumero(String numeroCuenta) {
         Session session = sessionFactory.getCurrentSession();
         List<CuentaBancaria> cuentasBancarias;
 
-        if (numero == 0) {
+        if (numeroCuenta == null || numeroCuenta.trim().equals("")) {
             cuentasBancarias = findAll();
         } else {
-            Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE numeroCuenta= ?");
-            query.setInteger(0, numero);
+            Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE numeroCuenta LIKE ?");
+            query.setString(0, "%" + numeroCuenta + "%");
             cuentasBancarias = query.list();
 
         }

@@ -70,8 +70,8 @@ public class CuentaBancariaController {
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<CuentaBancaria> cuentasBancarias = null;
-            int numeroCuentaBancaria =Integer.parseInt( httpServletRequest.getParameter("numeroCuentaBancaria"));
-            if (numeroCuentaBancaria != 0) {
+            String numeroCuentaBancaria =httpServletRequest.getParameter("numeroCuentaBancaria");
+            if (numeroCuentaBancaria != null) {
                 cuentasBancarias = cuentaBancariaDAO.findByNumero(numeroCuentaBancaria);
             } else {
                 cuentasBancarias = cuentaBancariaDAO.findAll();
