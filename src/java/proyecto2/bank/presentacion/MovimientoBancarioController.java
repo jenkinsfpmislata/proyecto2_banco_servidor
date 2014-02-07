@@ -78,7 +78,7 @@ public class MovimientoBancarioController {
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<MovimientoBancario> movimientosBancarios = null;
-            String concepto = httpServletRequest.getParameter("concepto"); 
+            String concepto = httpServletRequest.getParameter("conceptoMovimiento"); 
             if (concepto != null) {
                 movimientosBancarios = movimientoBancarioDAO.findByConcepto(concepto);
             } else {
