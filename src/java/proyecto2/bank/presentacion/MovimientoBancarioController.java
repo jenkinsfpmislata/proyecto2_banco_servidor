@@ -30,6 +30,7 @@ import proyecto2.bank.negocio.MovimientoBancario;
  *
  * @author alumno
  */
+@Controller
 public class MovimientoBancarioController {
 
     @Autowired
@@ -57,14 +58,13 @@ public class MovimientoBancarioController {
 
     }
 
-
-     @RequestMapping(value = {"/MovimientoBancario"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = {"/MovimientoBancario"}, method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             List<MovimientoBancario> movimientosBancarios = null;
-            String id = httpServletRequest.getParameter("idMovimiento"); 
-            if (id != null) {
-                movimientosBancarios = movimientoBancarioDAO.findById(id);
+            String concepto = httpServletRequest.getParameter("conceptoMovimiento");
+            if (concepto != null) {
+                movimientosBancarios = movimientoBancarioDAO.findByConcepto(concepto);
             } else {
                 movimientosBancarios = movimientoBancarioDAO.findAll();
             }
@@ -84,8 +84,8 @@ public class MovimientoBancarioController {
             }
         }
     }
-     
-     @RequestMapping(value = {"/MovimientoBancario"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+
+    @RequestMapping(value = {"/MovimientoBancario"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -122,8 +122,6 @@ public class MovimientoBancarioController {
         }
 
     }
-     
-   
 
     private void noCache(HttpServletResponse httpServletResponse) {
         httpServletResponse.setHeader("Cache-Control", "no-cache");

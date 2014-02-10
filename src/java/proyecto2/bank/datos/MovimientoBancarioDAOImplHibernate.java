@@ -17,10 +17,10 @@ import proyecto2.bank.negocio.MovimientoBancario;
 public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<MovimientoBancario, Integer> implements MovimientoBancarioDAO {
 
     @Override
-    public List<MovimientoBancario> findById(String id) {
+    public List<MovimientoBancario> findById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE idmovimientobancario LIKE ?");
-        query.setString(0, id);
+        Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE idmovimientobancario =?");
+        query.setInteger(0, id);
         List<MovimientoBancario> movimientosBancarios = query.list();
         return movimientosBancarios;
     }

@@ -12,7 +12,7 @@ import java.util.Date;
  * @author alumno
  */
 public class MovimientoBancario {
-    private String idMovimientoBancario;
+    private int idMovimientoBancario;
     private TipoMovimientoBancario tipoMovimientoBancario;
     private BigDecimal importe;
     private Date fecha;
@@ -23,7 +23,7 @@ public class MovimientoBancario {
     public MovimientoBancario() {
     }
 
-    public MovimientoBancario(String idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, BigDecimal importe, Date fecha, BigDecimal saldoTotal, String concepto, CuentaBancaria cuentaBancaria) {
+    public MovimientoBancario(int idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, BigDecimal importe, Date fecha, BigDecimal saldoTotal, String concepto, CuentaBancaria cuentaBancaria) {
         this.idMovimientoBancario = idMovimientoBancario;
         this.tipoMovimientoBancario = tipoMovimientoBancario;
         this.importe = importe;
@@ -35,11 +35,11 @@ public class MovimientoBancario {
         
     }
 
-    public String getIdMovimientoBancario() {
+    public int getIdMovimientoBancario() {
         return idMovimientoBancario;
     }
 
-    public void setIdMovimientoBancario(String idMovimientoBancario) {
+    public void setIdMovimientoBancario(int idMovimientoBancario) {
         this.idMovimientoBancario = idMovimientoBancario;
     }
 
