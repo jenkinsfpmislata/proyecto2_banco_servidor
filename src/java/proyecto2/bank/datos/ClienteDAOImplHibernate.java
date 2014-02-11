@@ -17,18 +17,24 @@ import proyecto2.bank.negocio.Cliente;
 public class ClienteDAOImplHibernate extends GenericDAOImplHibernate<Cliente, Integer> implements ClienteDAO {
 
     @Override
-    public List<Cliente> findbyDni(String dni) {
-         if (dni  == null || dni.equals("")) {
-            return findAll();
+    public Cliente readByLogin(String login) {
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("SELECT cliente FROM Cliente cliente WHERE login = ?");
+        query.setString(0, login);
+
+        List<Cliente> loginList = query.list();
+        if (loginList.isEmpty()) {
+            return null;
         } else {
-               Session session = sessionFactory.getCurrentSession();
-            session.beginTransaction();
-            Query query = session.createQuery("Select cl from Cliente cl  where dni LIKE ?");
-            query.setString(0, dni + "%");
-            List<Cliente> objectList = query.list();
-            session.getTransaction().commit();
-            return objectList;
-         }
+            if (loginList.size() == 1) {
+                Cliente cliente = loginList.get(0);
+                return cliente;
+            } else {
+                return null;
+            }
+        }
     }
-    
 }
