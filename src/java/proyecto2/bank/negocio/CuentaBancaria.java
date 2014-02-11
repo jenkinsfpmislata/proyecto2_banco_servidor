@@ -4,6 +4,8 @@
  */
 package proyecto2.bank.negocio;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,8 @@ import java.util.List;
  *
  * @author alumno
  */
-public class CuentaBancaria {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+public class CuentaBancaria  implements Serializable{
 
     private int idCuentaBancaria;
     private SucursalBancaria sucursalBancaria;
