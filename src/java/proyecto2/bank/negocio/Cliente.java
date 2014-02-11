@@ -2,33 +2,36 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package proyecto2.bank.negocio;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import org.jasypt.util.password.BasicPasswordEncryptor;
+
 /**
  *
  * @author alumno
  */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Cliente implements Serializable {
-    
+
     private int idCliente;
     private String nombreCliente;
     private String apellidoCliente;
     private String login;
     private String password;
+    private String dni;
 
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombreCliente, String apellidoCliente, String login, String password) {
+    public Cliente(int idCliente, String nombreCliente, String apellidoCliente, String login, String password,String dni) {
         this.idCliente = idCliente;
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
         this.login = login;
         this.password = password;
+        this.dni= dni;
     }
 
     public int getIdCliente() {
@@ -70,11 +73,19 @@ public class Cliente implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-       public boolean checkPassword(String unEncryptedPassword) { //no encriptado
-        String cryptedPassword=getPassword(); // encriptado
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public boolean checkPassword(String unEncryptedPassword) { //no encriptado
+        String cryptedPassword = getPassword(); // encriptado
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-       // String encryptedPassword = passwordEncryptor.encryptPassword(password); crear usuario
+        // String encryptedPassword = passwordEncryptor.encryptPassword(password); crear usuario
 
         if (passwordEncryptor.checkPassword(unEncryptedPassword, cryptedPassword)) {
             return true;
@@ -82,5 +93,4 @@ public class Cliente implements Serializable {
             return false;
         }
     }
-    
 }

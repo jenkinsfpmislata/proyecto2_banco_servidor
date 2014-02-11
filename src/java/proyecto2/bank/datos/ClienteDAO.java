@@ -4,10 +4,19 @@
  */
 package proyecto2.bank.datos;
 
+import proyecto2.bank.negocio.Cliente;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
 /**
  *
  * @author alumno
  */
-public class ClienteDAO {
+public interface ClienteDAO extends GenericDAO<Cliente, Integer> {
+    
+    public List<Cliente> findbyDni(String dni);
+    
+    
+    
     
 }
