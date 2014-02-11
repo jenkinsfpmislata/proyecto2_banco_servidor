@@ -18,4 +18,5 @@
     <bean class="proyecto2.bank.datos.SucursalBancariaDAOImplHibernate" />
     <bean class="proyecto2.bank.datos.CuentaBancariaDAOImplHibernate" />
     <bean class="proyecto2.bank.datos.MovimientoBancarioDAOImplHibernate" />
+    <bean class="proyecto2.bank.datos.ClienteDAOImplHibernate" />
 </beans>

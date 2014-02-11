@@ -4,6 +4,7 @@
  */
 package proyecto2.bank.negocio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  *
  * @author alumno
  */
-public class MovimientoBancario {
+public class MovimientoBancario implements Serializable {
     private int idMovimientoBancario;
     private TipoMovimientoBancario tipoMovimientoBancario;
     private BigDecimal importe;
