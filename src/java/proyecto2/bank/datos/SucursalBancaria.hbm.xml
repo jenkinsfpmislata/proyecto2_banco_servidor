@@ -7,5 +7,8 @@
         </id>
         <property name="codigoSucursalBancaria" column="codigoSucursal" />
         <property name="nombreSucursalBancaria" column="nombre"/>
+        <many-to-one name="entidadBancaria">
+            <column name="entidadBancaria"/>
+        </many-to-one> 
     </class>
 </hibernate-mapping>

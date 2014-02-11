@@ -15,5 +15,8 @@
         <property name="fecha" type="date"/>
         <property name="saldoTotal" type="big_decimal"/>
         <property name="concepto"/>
+        <many-to-one name="cuentaBancaria">
+            <column name="cuentaBancaria"/>
+        </many-to-one> 
     </class>
 </hibernate-mapping>
