@@ -16,4 +16,5 @@ public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, In
     List<MovimientoBancario> findById(int id);
 
     List<MovimientoBancario> findByConcepto(String concepto);
+    
 }

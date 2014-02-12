@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import proyecto2.bank.negocio.CuentaBancaria;
+import proyecto2.bank.negocio.MovimientoBancario;
 
 /**
  *
@@ -38,5 +39,21 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
 
         }
         return cuentasBancarias;
+    }
+
+    @Override
+    public List<MovimientoBancario> findByMovimiento(int idCuentaBancaria) {
+        Session session = sessionFactory.getCurrentSession();
+        List<MovimientoBancario> movimientosBancarios;
+
+        if (idCuentaBancaria == 0) {
+            movimientosBancarios = null;
+        } else {
+            Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE cuentaBancaria LIKE  ?");
+            query.setInteger(0, idCuentaBancaria);
+            movimientosBancarios = query.list();
+
+        }
+        return movimientosBancarios;
     }
 }

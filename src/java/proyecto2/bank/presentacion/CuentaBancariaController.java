@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import proyecto2.bank.datos.BussinessMessage;
 import proyecto2.bank.datos.CuentaBancariaDAO;
 import proyecto2.bank.negocio.CuentaBancaria;
+import proyecto2.bank.negocio.MovimientoBancario;
 
 @Controller
 public class CuentaBancariaController {
@@ -158,6 +159,33 @@ public class CuentaBancariaController {
             } catch (IOException ex1) {
             }
         }
+    }
+    
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}/MovimientoBancario"}, method = RequestMethod.GET, produces = "application/json")
+    public void findSMovimientosBancarios(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
+        try {
+            List<MovimientoBancario> movimientosBancarias = null;
+            if (idCuentaBancaria != 0) {
+                movimientosBancarias = cuentaBancariaDAO.findByMovimiento(idCuentaBancaria);
+            } else {
+                movimientosBancarias = null;
+            }
+            noCache(httpServletResponse);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.setStatus(httpServletResponse.SC_OK);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(movimientosBancarias);
+            httpServletResponse.getWriter().println(json);
+        } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex1) {
+            }
+        }
+
     }
 
     private void noCache(HttpServletResponse httpServletResponse) {
