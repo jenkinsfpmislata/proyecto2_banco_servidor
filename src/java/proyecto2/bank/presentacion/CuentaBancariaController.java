@@ -138,10 +138,10 @@ public class CuentaBancariaController {
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             CuentaBancaria cuentaBancariaActualizada = (CuentaBancaria) objectMapper.readValue(json, CuentaBancaria.class);
 
-            cuentaBancaria.setIdCuentaBancaria(cuentaBancariaActualizada.getIdCuentaBancaria());
             cuentaBancaria.setNumeroCuenta(cuentaBancariaActualizada.getNumeroCuenta());
             cuentaBancaria.setDc(cuentaBancariaActualizada.getDc());
             cuentaBancaria.setCif(cuentaBancariaActualizada.getCif());
+            cuentaBancaria.setSucursalBancaria(cuentaBancariaActualizada.getSucursalBancaria());
 
             cuentaBancariaDAO.update(cuentaBancaria);
             noCache(httpServletResponse);
