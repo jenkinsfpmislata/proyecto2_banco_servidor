@@ -44,10 +44,10 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
 
     @Override
     public void insert(MovimientoBancario movimientoBancario) {
-        BigDecimal resultado = movimientoBancario.getSaldoTotal();
+        BigDecimal resultado = movimientoBancario.getCuentaBancaria().getSaldo();
         switch (movimientoBancario.getTipoMovimientoBancario()) {
             case DEBE:
-                resultado = resultado.add(movimientoBancario.getImporte());
+                resultado = resultado.subtract(movimientoBancario.getImporte());
                 movimientoBancario.getCuentaBancaria().setSaldo(resultado);
                 movimientoBancario.setSaldoTotal(resultado);
                 break;
