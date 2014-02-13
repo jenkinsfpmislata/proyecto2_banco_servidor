@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import proyecto2.bank.datos.BussinessMessage;
+import proyecto2.bank.datos.CuentaBancariaDAO;
 import proyecto2.bank.datos.MovimientoBancarioDAO;
+import proyecto2.bank.negocio.CuentaBancaria;
 import proyecto2.bank.negocio.MovimientoBancario;
 
 /**
@@ -35,6 +37,10 @@ public class MovimientoBancarioController {
 
     @Autowired
     MovimientoBancarioDAO movimientoBancarioDAO;
+    
+    @Autowired
+    CuentaBancariaDAO cuentaBancariaDAO;
+    
 
     @RequestMapping(value = {"/MovimientoBancario/{idMovimientoBancario}"}, method = RequestMethod.GET, produces = "application/json")
     public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimientoBancario") int idMovimientoBancario) {
@@ -91,6 +97,8 @@ public class MovimientoBancarioController {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         try {
             MovimientoBancario movimientoBancario = (MovimientoBancario) objectMapper.readValue(json, MovimientoBancario.class);
+            CuentaBancaria cuentabancaria=cuentaBancariaDAO.read(movimientoBancario.getCuentaBancaria().getIdCuentaBancaria());
+            movimientoBancario.setCuentaBancaria(cuentabancaria);
             movimientoBancarioDAO.insert(movimientoBancario);
             noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");

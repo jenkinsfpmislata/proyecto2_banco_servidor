@@ -44,20 +44,26 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
 
     @Override
     public void insert(MovimientoBancario movimientoBancario) {
-        BigDecimal resultado = movimientoBancario.getCuentaBancaria().getSaldo();
+
+        BigDecimal saldo = movimientoBancario.getCuentaBancaria().getSaldo();
+        BigDecimal importe = movimientoBancario.getImporte();
+
+        BigDecimal newSaldo;
+
         switch (movimientoBancario.getTipoMovimientoBancario()) {
             case DEBE:
-                resultado = resultado.subtract(movimientoBancario.getImporte());
-                movimientoBancario.getCuentaBancaria().setSaldo(resultado);
-                movimientoBancario.setSaldoTotal(resultado);
+                newSaldo = saldo.subtract(importe);
                 break;
             case HABER:
-                resultado = resultado.add(movimientoBancario.getImporte());
-                movimientoBancario.getCuentaBancaria().setSaldo(resultado);
-                movimientoBancario.setSaldoTotal(resultado);
+                newSaldo = saldo.add(importe);
                 break;
-            default: System.out.println("ERROR: Tipo de movimiento "+ movimientoBancario.getTipoMovimientoBancario() +" no reconocido");
+            default:
+                throw new RuntimeException("ERROR: Tipo de movimiento " + movimientoBancario.getTipoMovimientoBancario() + " no reconocido");
         }
+
+        movimientoBancario.getCuentaBancaria().setSaldo(newSaldo);
+        movimientoBancario.setSaldoTotal(newSaldo);
+
         super.insert(movimientoBancario);
     }
 }
