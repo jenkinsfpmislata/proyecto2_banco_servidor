@@ -4,11 +4,12 @@
  */
 package proyecto2.bank.datos;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import proyecto2.bank.negocio.MovimientoBancario;
-
+import proyecto2.bank.negocio.TipoMovimientoBancario;
 
 /**
  *
@@ -39,5 +40,24 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
 
         }
         return movimientosBancarios;
+    }
+
+    @Override
+    public void insert(MovimientoBancario movimientoBancario) {
+        BigDecimal resultado = movimientoBancario.getSaldoTotal();
+        switch (movimientoBancario.getTipoMovimientoBancario()) {
+            case DEBE:
+                resultado = resultado.add(movimientoBancario.getImporte());
+                movimientoBancario.getCuentaBancaria().setSaldo(resultado);
+                movimientoBancario.setSaldoTotal(resultado);
+                break;
+            case HABER:
+                resultado = resultado.add(movimientoBancario.getImporte());
+                movimientoBancario.getCuentaBancaria().setSaldo(resultado);
+                movimientoBancario.setSaldoTotal(resultado);
+                break;
+            default: System.out.println("ERROR: Tipo de movimiento "+ movimientoBancario.getTipoMovimientoBancario() +" no reconocido");
+        }
+        super.insert(movimientoBancario);
     }
 }
