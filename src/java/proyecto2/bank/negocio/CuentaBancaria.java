@@ -4,6 +4,8 @@
  */
 package proyecto2.bank.negocio;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +14,13 @@ import java.util.List;
  *
  * @author alumno
  */
-public class CuentaBancaria {
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+public class CuentaBancaria  implements Serializable{
 
     private int idCuentaBancaria;
     private SucursalBancaria sucursalBancaria;
-    private int numeroCuenta;
-    private int dc; //El dígito de control de la cuenta bancaria 
+    private String numeroCuenta;
+    private String dc; //El dígito de control de la cuenta bancaria 
     private BigDecimal saldo; //El saldo de la cuenta.Es decir cuanto dinero hay en la cuenta 
     private String cif;
     private List<MovimientoBancario> listaMovimiento = new ArrayList<>();
@@ -25,7 +28,7 @@ public class CuentaBancaria {
     public CuentaBancaria() {
     }
 
-    public CuentaBancaria(int idCuentaBancaria, SucursalBancaria sucursalBancaria, int numeroCuenta, int dc, BigDecimal saldo, String cif) {
+    public CuentaBancaria(int idCuentaBancaria, SucursalBancaria sucursalBancaria, String numeroCuenta, String dc, BigDecimal saldo, String cif) {
         this.idCuentaBancaria = idCuentaBancaria;
         this.sucursalBancaria = sucursalBancaria;
         this.numeroCuenta = numeroCuenta;
@@ -51,19 +54,19 @@ public class CuentaBancaria {
         this.sucursalBancaria = sucursalBancaria;
     }
 
-    public int getNumeroCuenta() {
+    public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(int numeroCuenta) {
+    public void setNumeroCuenta(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public int getDc() {
+    public String getDc() {
         return dc;
     }
 
-    public void setDc(int dc) {
+    public void setDc(String dc) {
         this.dc = dc;
     }
 

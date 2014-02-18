@@ -2,7 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="proyecto2.bank.negocio.CuentaBancaria" table="cuentabancaria" >
-        <id column="idcuentabancaria" name="idCuentaBancaria" type="integer"/>
+        <id column="idcuentabancaria" name="idCuentaBancaria" type="integer">
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sucursalBancaria">
+            <column name="sucursalBancaria"/>
+        </many-to-one> 
         <property name="numeroCuenta"/>
         <property name="dc" />
         <property name="saldo" type="big_decimal"/>

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto2.bank.presentacion;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,29 +19,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import proyecto2.bank.datos.BussinessMessage;
-import proyecto2.bank.datos.EntidadBancariaDAO;
-import proyecto2.bank.negocio.EntidadBancaria;
-import proyecto2.bank.negocio.SucursalBancaria;
+import proyecto2.bank.datos.CuentaBancariaDAO;
+import proyecto2.bank.negocio.CuentaBancaria;
+import proyecto2.bank.negocio.MovimientoBancario;
 
-/**
- *
- * @author alumno
- */
 @Controller
-public class EntidadBancariaController {
+public class CuentaBancariaController {
 
     @Autowired
-    EntidadBancariaDAO entidadBancariaDAO;
+    CuentaBancariaDAO cuentaBancariaDAO;
 
-    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.GET, produces = "application/json")
-    public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.GET, produces = "application/json")
+    public void read(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
-            EntidadBancaria entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
+            CuentaBancaria cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
             noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
-            String json = objectMapper.writeValueAsString(entidadBancaria);
+            String json = objectMapper.writeValueAsString(cuentaBancaria);
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -56,15 +48,13 @@ public class EntidadBancariaController {
             } catch (IOException ex1) {
             }
         }
-
     }
 
-    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.DELETE)
-    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.DELETE)
+    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
         try {
-            entidadBancariaDAO.delete(idEntidadBancaria);
+            cuentaBancariaDAO.delete(idCuentaBancaria);
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            noCache(httpServletResponse);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             noCache(httpServletResponse);
@@ -77,21 +67,21 @@ public class EntidadBancariaController {
 
     }
 
-    @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = {"/CuentaBancaria"}, method = RequestMethod.GET, produces = "application/json")
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
-            List<EntidadBancaria> entidadesBancarias = null;
-            String nombreEntidadBancaria = httpServletRequest.getParameter("nombreEntidadBancaria");
-            if (nombreEntidadBancaria != null) {
-                entidadesBancarias = entidadBancariaDAO.findByNombre(nombreEntidadBancaria);
+            List<CuentaBancaria> cuentasBancarias = null;
+            String numeroCuentaBancaria =httpServletRequest.getParameter("numeroCuentaBancaria");
+            if (numeroCuentaBancaria != null) {
+                cuentasBancarias = cuentaBancariaDAO.findByNumero(numeroCuentaBancaria);
             } else {
-                entidadesBancarias = entidadBancariaDAO.findAll();
+                cuentasBancarias = cuentaBancariaDAO.findAll();
             }
             noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
-            String json = objectMapper.writeValueAsString(entidadesBancarias);
+            String json = objectMapper.writeValueAsString(cuentasBancarias);
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -104,16 +94,16 @@ public class EntidadBancariaController {
         }
     }
 
-    @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = {"/CuentaBancaria"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         try {
-            EntidadBancaria entidadBancaria = (EntidadBancaria) objectMapper.readValue(json, EntidadBancaria.class);
-            entidadBancariaDAO.insert(entidadBancaria);
+            CuentaBancaria cuentaBancaria = (CuentaBancaria) objectMapper.readValue(json, CuentaBancaria.class);
+            cuentaBancariaDAO.insert(cuentaBancaria);
             noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
-            json = objectMapper.writeValueAsString(entidadBancaria);
+            json = objectMapper.writeValueAsString(cuentaBancaria);
             httpServletResponse.getWriter().println(json);
 
         } catch (ConstraintViolationException cve) {
@@ -139,28 +129,52 @@ public class EntidadBancariaController {
             } catch (IOException ex1) {
             }
         }
-
     }
 
-    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria, @RequestBody String json) {
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}"}, method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String json) {
         try {
-            EntidadBancaria entidadBancaria = entidadBancariaDAO.read(idEntidadBancaria);
+            CuentaBancaria cuentaBancaria = cuentaBancariaDAO.read(idCuentaBancaria);
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-            EntidadBancaria entidadBancariaActualizada = (EntidadBancaria) objectMapper.readValue(json, EntidadBancaria.class);
+            CuentaBancaria cuentaBancariaActualizada = (CuentaBancaria) objectMapper.readValue(json, CuentaBancaria.class);
 
-            entidadBancaria.setCodigoEntidadBancaria(entidadBancariaActualizada.getCodigoEntidadBancaria());
-            entidadBancaria.setNombreEntidadBancaria(entidadBancariaActualizada.getNombreEntidadBancaria());
-            entidadBancaria.setCifEntidadBancaria(entidadBancariaActualizada.getCifEntidadBancaria());
-            entidadBancaria.setTipoEntidadBancaria(entidadBancariaActualizada.getTipoEntidadBancaria());
+            cuentaBancaria.setNumeroCuenta(cuentaBancariaActualizada.getNumeroCuenta());
+            cuentaBancaria.setDc(cuentaBancariaActualizada.getDc());
+            cuentaBancaria.setCif(cuentaBancariaActualizada.getCif());
+            cuentaBancaria.setSucursalBancaria(cuentaBancariaActualizada.getSucursalBancaria());
 
-            entidadBancariaDAO.update(entidadBancaria);
+            cuentaBancariaDAO.update(cuentaBancaria);
             noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
 
-            json = objectMapper.writeValueAsString(entidadBancaria);
+            json = objectMapper.writeValueAsString(cuentaBancaria);
+            httpServletResponse.getWriter().println(json);
+        } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex1) {
+            }
+        }
+    }
+    
+    @RequestMapping(value = {"/CuentaBancaria/{idCuentaBancaria}/MovimientoBancario"}, method = RequestMethod.GET, produces = "application/json")
+    public void findSMovimientosBancarios(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
+        try {
+            List<MovimientoBancario> movimientosBancarias = null;
+            if (idCuentaBancaria != 0) {
+                movimientosBancarias = cuentaBancariaDAO.findByMovimiento(idCuentaBancaria);
+            } else {
+                movimientosBancarias = null;
+            }
+            noCache(httpServletResponse);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            httpServletResponse.setStatus(httpServletResponse.SC_OK);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(movimientosBancarias);
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -171,22 +185,22 @@ public class EntidadBancariaController {
             } catch (IOException ex1) {
             }
         }
-    }
 
-    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}/SucursalesBancarias"}, method = RequestMethod.GET, produces = "application/json")
-    public void findSucursalesBancarias(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+    }
+     @RequestMapping(value = {"{idCliente}/CuentaBancaria/"}, method = RequestMethod.GET, produces = "application/json")
+    public void findCuentaCliente(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCliente") int idCliente) {
         try {
-            List<SucursalBancaria> sucursalesBancarias = null;
-            if (idEntidadBancaria != 0) {
-                sucursalesBancarias = entidadBancariaDAO.findBySucursal(idEntidadBancaria);
+             List<CuentaBancaria> cuentasBancarias = null;
+            if (idCliente != 0) {
+                cuentasBancarias = cuentaBancariaDAO.findByCliente(idCliente);
             } else {
-                sucursalesBancarias = null;
+                cuentasBancarias = null;
             }
             noCache(httpServletResponse);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(httpServletResponse.SC_OK);
             ObjectMapper objectMapper = new ObjectMapper();
-            String json = objectMapper.writeValueAsString(sucursalesBancarias);
+            String json = objectMapper.writeValueAsString(cuentasBancarias);
             httpServletResponse.getWriter().println(json);
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

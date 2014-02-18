@@ -2,7 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="proyecto2.bank.negocio.MovimientoBancario" table="movimientobancario" >
-        <id column="idMovimientoBancario" name="idMovimientoBancario" type="integer"/>
+        <id column="idMovimientoBancario" name="idMovimientoBancario" type="integer">
+            <generator class="identity" />
+        </id>
         <property name="tipoMovimientoBancario" column="tipoMovimientoBancario">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">proyecto2.bank.negocio.TipoMovimientoBancario</param>
@@ -13,5 +15,8 @@
         <property name="fecha" type="date"/>
         <property name="saldoTotal" type="big_decimal"/>
         <property name="concepto"/>
+        <many-to-one name="cuentaBancaria">
+            <column name="cuentaBancaria"/>
+        </many-to-one> 
     </class>
 </hibernate-mapping>

@@ -2,8 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="proyecto2.bank.negocio.SucursalBancaria" table="sucursalbancaria" >
-        <id column="idSucursal" name="idSucursalBancaria" type="integer"/>
+        <id column="idSucursal" name="idSucursalBancaria" type="integer">
+            <generator class="identity" />
+        </id>
         <property name="codigoSucursalBancaria" column="codigoSucursal" />
         <property name="nombreSucursalBancaria" column="nombre"/>
+        <many-to-one name="entidadBancaria">
+            <column name="entidadBancaria"/>
+        </many-to-one> 
     </class>
 </hibernate-mapping>
