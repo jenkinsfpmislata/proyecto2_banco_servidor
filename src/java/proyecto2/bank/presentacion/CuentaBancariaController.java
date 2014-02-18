@@ -187,7 +187,7 @@ public class CuentaBancariaController {
         }
 
     }
-     @RequestMapping(value = {"{idCliente}/CuentaBancaria/"}, method = RequestMethod.GET, produces = "application/json")
+     @RequestMapping(value = {"/{idCliente}/CuentaBancaria"}, method = RequestMethod.GET, produces = "application/json")
     public void findCuentaCliente(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCliente") int idCliente) {
         try {
              List<CuentaBancaria> cuentasBancarias = null;
