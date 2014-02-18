@@ -56,4 +56,13 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
         }
         return movimientosBancarios;
     }
+
+    @Override
+    public List<CuentaBancaria> findByCliente(int id) {
+       Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE idCliente= ?");
+        query.setInteger(0, id);
+        List<CuentaBancaria> cuentasBancarias = query.list();
+        return cuentasBancarias; 
+    }
 }

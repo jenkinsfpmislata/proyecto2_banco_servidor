@@ -15,6 +15,8 @@ import proyecto2.bank.negocio.MovimientoBancario;
 public interface CuentaBancariaDAO extends GenericDAO<CuentaBancaria, Integer> {
 
     List<CuentaBancaria> findById(int id);
+    
+    List<CuentaBancaria> findByCliente(int id);
 
     List<CuentaBancaria> findByNumero(String numeroCuenta);
     
