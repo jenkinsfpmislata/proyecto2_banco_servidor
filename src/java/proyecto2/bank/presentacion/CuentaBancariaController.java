@@ -188,7 +188,7 @@ public class CuentaBancariaController {
 
     }
      @RequestMapping(value = {"/{idCliente}/CuentaBancaria"}, method = RequestMethod.GET, produces = "application/json")
-    public void findCuentaCliente(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCliente") int idCliente) {
+    public void findCuentaCliente(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idCliente") int idCliente) throws JsonProcessingException {
         try {
              List<CuentaBancaria> cuentasBancarias = null;
             if (idCliente != 0) {
@@ -202,6 +202,22 @@ public class CuentaBancariaController {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(cuentasBancarias);
             httpServletResponse.getWriter().println(json);
+        } catch (ConstraintViolationException cve) {
+            List<BussinessMessage> listaBussinessMessages = new ArrayList<>();
+            for (ConstraintViolation constraintViolation : cve.getConstraintViolations()) {
+                BussinessMessage bussinessMessage = new BussinessMessage(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
+                listaBussinessMessages.add(bussinessMessage);
+            }
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
+             ObjectMapper objectMapper = new ObjectMapper();
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            String json = objectMapper.writeValueAsString(listaBussinessMessages);
+            try {
+                httpServletResponse.getWriter().println(json);
+            } catch (IOException ex) {
+            }
+            
         } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             noCache(httpServletResponse);
