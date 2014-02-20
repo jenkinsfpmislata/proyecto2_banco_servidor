@@ -36,6 +36,10 @@ public class SessionController {
             ObjectMapper objectMapper = new ObjectMapper();
             Credenciales credenciales = objectMapper.readValue(json, Credenciales.class);
             Cliente cliente = clientesDAO.readByLogin(credenciales.getLogin());
+              
+            ObjectMapper objectMapper2 = new ObjectMapper();
+            String json2 = objectMapper2.writeValueAsString(cliente);
+            httpServletResponse.getWriter().println(json2);
             
         if (credenciales != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
