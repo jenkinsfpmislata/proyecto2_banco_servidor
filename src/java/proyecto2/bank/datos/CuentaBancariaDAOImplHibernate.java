@@ -65,4 +65,14 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
         List<CuentaBancaria> cuentasBancarias = query.list();
         return cuentasBancarias; 
     }
+    
+    @Override
+    public CuentaBancaria findByCodigoCuentaCliente(String codigoCuentaCliente){
+        CuentaBancaria cuentaBancaria = null;
+        
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT cuentaBancaria FROM CuentaBancaria cuentaBancaria WHERE cuentaBancaria.sucursalBancaria.codigoSucursal=? AND cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria=? AND cuentaBancaria.dc=? AND cuentaBancaria.numeroCuenta=?");
+        return cuentaBancaria;
+    
+    }
 }
