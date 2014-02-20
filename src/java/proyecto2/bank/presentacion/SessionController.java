@@ -28,7 +28,7 @@ public class SessionController {
     @Autowired
     ClienteDAO clientesDAO = new ClienteDAOImplHibernate();
     
-    @RequestMapping(value = {"/session"}, method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = {"/Cliente"}, method = RequestMethod.POST, produces = "application/json")
     public void readByLogin(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) {
         try {
             httpServletResponse.setContentType("application/json; charset=UTF-8");
@@ -41,7 +41,7 @@ public class SessionController {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             
 
-            if (cliente.checkPassword(credenciales.getPassword())) {
+           /* if (cliente.checkPassword(credenciales.getPassword())) {
 
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
@@ -50,11 +50,12 @@ public class SessionController {
                 json = objectMappers.writeValueAsString(cliente);
                 httpServletResponse.getWriter().println(json);
 
-            } else {
+            }
+            else {
                 httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            }*/
             }
-            }
-
+ 
         } catch (Exception ex) {
             Logger.getLogger(SessionController.class.getName()).log(Level.SEVERE, null, ex);
         }
