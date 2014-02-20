@@ -4,6 +4,7 @@
     <class name="proyecto2.bank.negocio.Cliente" table="clientes" >
         <id name="idCliente" type="integer"/>
         <property name="nombreCliente"/>
+        <property name="login"/>
         <property name="apellidoCliente" />
         <property name="dni"/>
         
