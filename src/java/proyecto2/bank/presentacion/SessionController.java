@@ -34,25 +34,25 @@ public class SessionController {
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             ObjectMapper objectMapper = new ObjectMapper();
             Credenciales credenciales = objectMapper.readValue(json, Credenciales.class);
-            Cliente cliente = clientesDAO.readByLogin(credenciales.getLogin());
+            Cliente cliente = clientesDAO.readByLogin(credenciales.getLogin(),credenciales.getPassword());
 
 
             if (credenciales != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             
 
-            if (cliente.checkPassword(credenciales.getPassword())) {
-
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                httpServletResponse.setContentType("application/json; charset=UTF-8");
-                ObjectMapper objectMappers = new ObjectMapper();
-
-                json = objectMappers.writeValueAsString(cliente);
-                httpServletResponse.getWriter().println(json);
-
-            } else {
-                httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            }
+//            if (cliente.checkPassword(credenciales.getPassword())) {
+//
+//                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+//                httpServletResponse.setContentType("application/json; charset=UTF-8");
+//                ObjectMapper objectMappers = new ObjectMapper();
+//
+//                json = objectMappers.writeValueAsString(cliente);
+//                httpServletResponse.getWriter().println(json);
+//
+//            } else {
+//                httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+//            }
             }
 
         } catch (Exception ex) {

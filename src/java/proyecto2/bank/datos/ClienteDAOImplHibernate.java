@@ -17,13 +17,14 @@ import proyecto2.bank.negocio.Cliente;
 public class ClienteDAOImplHibernate extends GenericDAOImplHibernate<Cliente, Integer> implements ClienteDAO {
 
     @Override
-    public Cliente readByLogin(String login) {
+    public Cliente readByLogin(String login, String password) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("SELECT cliente FROM Cliente cliente WHERE login = ?");
+        Query query = session.createQuery("SELECT cliente FROM Cliente cliente WHERE login = ? and password = ?");
         query.setString(0, login);
+        query.setString(1, password);
 
         List<Cliente> loginList = query.list();
         if (loginList.isEmpty()) {

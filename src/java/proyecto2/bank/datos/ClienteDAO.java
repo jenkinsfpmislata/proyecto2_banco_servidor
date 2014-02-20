@@ -14,7 +14,7 @@ import org.hibernate.Session;
  */
 public interface ClienteDAO extends GenericDAO<Cliente, Integer> {
     
-    public Cliente readByLogin(String login);
+    public Cliente readByLogin(String login, String password);
     
     
     
