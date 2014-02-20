@@ -51,7 +51,7 @@ public class TransaccionController {
             movimientoBancario.setImporte(new BigDecimal(transaccion[4]));
             movimientoBancario.setFecha(new Date());
             movimientoBancario.setConcepto("TRANSFERENCIA -- Cuenta origen:"+transaccion[3]);
-            movimientoBancario.setCuentaBancaria(cuentaBancariaDAO.findByNumero(transaccion[2]));
+
             
             
             
