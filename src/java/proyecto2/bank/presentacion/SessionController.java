@@ -43,7 +43,7 @@ public class SessionController {
             httpServletResponse.getWriter().println(json2);
             
             
-           httpRequest.getSession(true).setAttribute("idUsuario",credenciales.getLogin());
+           httpRequest.getSession(true).setAttribute("idCliente",cliente.getIdCliente());
             
         if (credenciales != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
