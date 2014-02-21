@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +41,9 @@ public class SessionController {
             ObjectMapper objectMapper2 = new ObjectMapper();
             String json2 = objectMapper2.writeValueAsString(cliente);
             httpServletResponse.getWriter().println(json2);
+            
+            
+           httpRequest.getSession(true).setAttribute("idUsuario",credenciales.getLogin());
             
         if (credenciales != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
