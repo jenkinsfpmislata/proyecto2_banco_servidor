@@ -38,4 +38,26 @@ public class ClienteDAOImplHibernate extends GenericDAOImplHibernate<Cliente, In
             }
         }
     }
+
+    @Override
+    public Cliente getClient(String login) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("SELECT cliente FROM Cliente cliente WHERE login = ?");
+        query.setString(0, login);
+        
+
+        List<Cliente> loginList = query.list();
+        if (loginList.isEmpty()) {
+            return null;
+        } else {
+            if (loginList.size() == 1) {
+                Cliente cliente = loginList.get(0);
+                return cliente;
+            } else {
+                return null;
+            }
+        }
+    }
 }

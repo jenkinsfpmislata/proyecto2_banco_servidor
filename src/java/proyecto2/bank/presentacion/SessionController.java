@@ -33,32 +33,7 @@ public class SessionController {
     
 
     //
-    @RequestMapping(value = {"/Login"}, method = RequestMethod.GET, produces = "application/json")
-    public void getLogin(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
-        try {
-            int idCliente = httpRequest.getSession(true).getAttribute("idCliente");
-            httpServletResponse.setContentType("application/json; charset=UTF-8");
-            Cliente cliente = clientesDAO.readByLogin(idCliente);
-              
-            ObjectMapper objectMapper2 = new ObjectMapper();
-            String json2 = objectMapper2.writeValueAsString(cliente);
-            httpServletResponse.getWriter().println(json2);
-            
-            
-           
-           
-
-        } catch (Exception ex) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            noCache(httpServletResponse);
-            httpServletResponse.setContentType("text/plain; charset=UTF-8");
-            try {
-                ex.printStackTrace(httpServletResponse.getWriter());
-            } catch (IOException ex1) {
-            }
-        }
-
-    }
+    
     
     @RequestMapping(value = {"/Login"}, method = RequestMethod.POST, produces = "application/json")
     public void readByLogin(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) {
@@ -73,7 +48,7 @@ public class SessionController {
             httpServletResponse.getWriter().println(json2);
             
             
-           httpRequest.getSession(true).setAttribute("idCliente",cliente.getIdCliente());
+           httpRequest.getSession(true).setAttribute("login",cliente.getLogin());
            
         if (credenciales != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -95,6 +70,30 @@ public class SessionController {
             }
 
         } catch (Exception ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            noCache(httpServletResponse);
+            httpServletResponse.setContentType("text/plain; charset=UTF-8");
+            try {
+                ex.printStackTrace(httpServletResponse.getWriter());
+            } catch (IOException ex1) {
+            }
+        }
+
+    }
+    @RequestMapping(value = {"/Login"}, method = RequestMethod.GET, produces = "application/json")
+    public void getLogin(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
+        try {
+            Object loginClass = httpRequest.getSession(true).getAttribute("login");
+            String login=loginClass.toString();
+         Cliente cliente = clientesDAO.getClient(login);
+          
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(cliente);
+            httpServletResponse.getWriter().println(json);
+            
+          } catch (Exception ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             noCache(httpServletResponse);
             httpServletResponse.setContentType("text/plain; charset=UTF-8");

@@ -16,7 +16,7 @@ public interface ClienteDAO extends GenericDAO<Cliente, Integer> {
     
     public Cliente readByLogin(String login, String password);
     
-    public Cliente getClient(int idCliente);
+    public Cliente getClient(String login);
     
     
     
