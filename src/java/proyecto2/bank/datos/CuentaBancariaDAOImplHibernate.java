@@ -59,20 +59,34 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
 
     @Override
     public List<CuentaBancaria> findByCliente(int id) {
-       Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE idCliente= ?");
         query.setInteger(0, id);
         List<CuentaBancaria> cuentasBancarias = query.list();
-        return cuentasBancarias; 
+        return cuentasBancarias;
     }
-    
+
     @Override
-    public CuentaBancaria findByCodigoCuentaCliente(String codigoCuentaCliente){
-        CuentaBancaria cuentaBancaria = null;
-        
+    public CuentaBancaria findByCodigoCuentaCliente(String codigoCuentaCliente) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT cuentaBancaria FROM CuentaBancaria cuentaBancaria WHERE cuentaBancaria.sucursalBancaria.codigoSucursal=? AND cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria=? AND cuentaBancaria.dc=? AND cuentaBancaria.numeroCuenta=?");
-        return cuentaBancaria;
-    
+        Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE cuentaBancaria.sucursalBancaria.codigoSucursal=? AND cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria=? AND cuentaBancaria.dc=? AND cuentaBancaria.numeroCuenta=?");
+
+        query.setString(0, codigoCuentaCliente.substring(0, 4));
+        query.setString(1, codigoCuentaCliente.substring(4, 8));
+        query.setString(2, codigoCuentaCliente.substring(8, 10));
+        query.setString(3, codigoCuentaCliente.substring(10, 20));
+
+        List<CuentaBancaria> cuentasBancarias = query.list();
+
+        if (cuentasBancarias != null) {
+            if (cuentasBancarias.size() == 1) {
+                CuentaBancaria cuentaBancaria = cuentasBancarias.get(0);
+                return cuentaBancaria;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }
