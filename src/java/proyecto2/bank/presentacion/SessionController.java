@@ -110,4 +110,12 @@ public class SessionController {
         httpServletResponse.setHeader("Cache-Control", "no-cache");
     }
     
+
+
+
+    @RequestMapping(value = {"/Login"}, method = RequestMethod.DELETE, produces = "application/json")
+    public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) {
+        httpRequest.getSession(true).setAttribute("login",null); 
+    }
+    
 }
