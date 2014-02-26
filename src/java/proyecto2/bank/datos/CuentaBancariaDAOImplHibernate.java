@@ -69,10 +69,10 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
     @Override
     public CuentaBancaria findByCodigoCuentaCliente(String codigoCuentaCliente) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE cuentaBancaria.sucursalBancaria.codigoSucursal=? AND cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria=? AND cuentaBancaria.dc=? AND cuentaBancaria.numeroCuenta=?");
+        Query query = session.createQuery("SELECT cb FROM CuentaBancaria cb WHERE cb.sucursalBancaria.codigoSucursalBancaria=? AND cb.sucursalBancaria.entidadBancaria.codigoEntidadBancaria=? AND cb.dc=? AND cb.numeroCuenta=?");
 
-        query.setString(0, codigoCuentaCliente.substring(0, 4));
-        query.setString(1, codigoCuentaCliente.substring(4, 8));
+        query.setString(1, codigoCuentaCliente.substring(0, 4));
+        query.setString(0, codigoCuentaCliente.substring(4, 8));
         query.setString(2, codigoCuentaCliente.substring(8, 10));
         query.setString(3, codigoCuentaCliente.substring(10, 20));
 

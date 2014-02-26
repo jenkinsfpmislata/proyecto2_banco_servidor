@@ -4,6 +4,10 @@
     Author     : alumno
 --%>
 
+<%@page import="proyecto2.bank.negocio.CuentaBancaria"%>
+<%@page import="proyecto2.bank.datos.CuentaBancariaDAO"%>
+<%@page import="proyecto2.bank.datos.CuentaBancariaDAOImplHibernate"%>
+<%@page import="proyecto2.bank.datos.MovimientoBancarioDAOImplHibernate"%>
 <%@page import="proyecto2.bank.datos.EntidadBancariaDAOImplHibernate"%>
 <%@page import="java.util.List"%>
 <%@page import="proyecto2.bank.datos.EntidadBancariaDAO"%>
@@ -15,7 +19,9 @@
     String nombre = request.getParameter("nombre");
     EntidadBancariaDAO entidadBancariaDAO = new EntidadBancariaDAOImplHibernate();
     List<EntidadBancaria> entidadesBancarias = entidadBancariaDAO.findByNombre(nombre);
-
+    
+    CuentaBancariaDAO cuentaBancariaDAO = new CuentaBancariaDAOImplHibernate();
+    CuentaBancaria cuentaBancaria = cuentaBancariaDAO.findByCodigoCuentaCliente("BA11SU11111234567890");
 %>
 
 <!DOCTYPE html>
@@ -27,6 +33,11 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
     </head>
     <body style="background-color: ghostwhite">
+        <div style="margin: 20px;">
+            Cuenta Bancaria
+            <%=cuentaBancaria.getNumeroCuenta() %>
+        </div>
+        
         <div id="insertar" style="margin: 10px;">
             <b>Insertar nueva Entidad Bancaria: </b>
             <a href="viewforinsert.jsp" ><input type="button" value="Nueva" class="btn btn-primary" /></a>

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import proyecto2.bank.negocio.CuentaBancaria;
 import proyecto2.bank.negocio.MovimientoBancario;
 import proyecto2.bank.negocio.TipoMovimientoBancario;
 
@@ -65,5 +66,17 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
         movimientoBancario.setSaldoTotal(newSaldo);
 
         super.insert(movimientoBancario);
+    }
+    
+    @Override
+    public boolean checkBalance(CuentaBancaria cuentaBancaria){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE saldoTotal < 0 AND cuentaBancaria=?;");
+        query.setInteger(0, cuentaBancaria.getIdCuentaBancaria());
+        if(query.list().size()>0){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

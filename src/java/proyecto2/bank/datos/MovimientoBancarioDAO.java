@@ -5,6 +5,7 @@
 package proyecto2.bank.datos;
 
 import java.util.List;
+import proyecto2.bank.negocio.CuentaBancaria;
 import proyecto2.bank.negocio.MovimientoBancario;
 
 /**
@@ -16,5 +17,7 @@ public interface MovimientoBancarioDAO extends GenericDAO<MovimientoBancario, In
     List<MovimientoBancario> findById(int id);
 
     List<MovimientoBancario> findByConcepto(String concepto);
+    
+    boolean checkBalance(CuentaBancaria cuentaBancaria);
     
 }

@@ -42,6 +42,7 @@ public class TransaccionController {
             
             // JSON {"user":"Patata","password":1234, "cuentaBancariaTienda":"1542545","cuentaBancariaCliente":"1542545", "importe":152.05}
             String[] transaccion = json.split(",");
+            
             String usuario = transaccion[0];
             String password = transaccion[1];
 
