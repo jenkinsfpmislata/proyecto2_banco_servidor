@@ -8,7 +8,6 @@
         <property name="tipoMovimientoBancario" column="tipoMovimientoBancario">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">proyecto2.bank.negocio.TipoMovimientoBancario</param>
-                <param name="type">12</param>
             </type>
         </property>
         <property name="importe" type="big_decimal"/>

@@ -31,6 +31,7 @@ public class CreditoController {
 
     @Autowired
     MovimientoBancarioDAO movimientoBancarioDAO;
+    @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
 
     @RequestMapping(value = {"/Credito"}, method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
@@ -38,30 +39,35 @@ public class CreditoController {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         try {
-            Credito credito = (Credito)  objectMapper.readValue(json, Credito.class);
-            MovimientoBancario movimientoBancario = null;
+
+            Credito credito = (Credito) objectMapper.readValue(json, Credito.class);
+
+
             BigDecimal cantidadCredito = credito.getImporte();
-            CuentaBancaria cuentaBancaria = cuentaBancariaDAO.findByCodigoCuentaCliente(credito.getCuentaBancaria());
+            String numeroCuenta = credito.getCuentaBancaria();
+            CuentaBancaria cuentaBancaria = cuentaBancariaDAO.findByCodigoCuentaCliente(numeroCuenta);
 
             if (movimientoBancarioDAO.checkBalance(cuentaBancaria)) {
+                System.out.println(cuentaBancaria.getNumeroCuenta() + "sadadasdsadsada");
+                MovimientoBancario movimientoBancario = new MovimientoBancario();
                 movimientoBancario.setCuentaBancaria(cuentaBancaria);
                 movimientoBancario.setConcepto("Credito bancario de " + cantidadCredito);
                 movimientoBancario.setFecha(new Date());
                 movimientoBancario.setImporte(cantidadCredito);
                 movimientoBancario.setTipoMovimientoBancario(TipoMovimientoBancario.HABER);
-                
+
                 movimientoBancarioDAO.insert(movimientoBancario);
 
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 json = objectMapper.writeValueAsString(movimientoBancario);
                 httpServletResponse.getWriter().println(json);
-            } else{
-                
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
 
 
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

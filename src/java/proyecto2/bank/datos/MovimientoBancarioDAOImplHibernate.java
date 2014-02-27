@@ -49,14 +49,16 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
         BigDecimal saldo = movimientoBancario.getCuentaBancaria().getSaldo();
         BigDecimal importe = movimientoBancario.getImporte();
 
-        BigDecimal newSaldo;
+        BigDecimal newSaldo= saldo.subtract(importe);
 
         switch (movimientoBancario.getTipoMovimientoBancario()) {
             case DEBE:
                 newSaldo = saldo.subtract(importe);
+   
                 break;
             case HABER:
                 newSaldo = saldo.add(importe);
+        
                 break;
             default:
                 throw new RuntimeException("ERROR: Tipo de movimiento " + movimientoBancario.getTipoMovimientoBancario() + " no reconocido");
@@ -64,15 +66,17 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
 
         movimientoBancario.getCuentaBancaria().setSaldo(newSaldo);
         movimientoBancario.setSaldoTotal(newSaldo);
-
+        System.out.println("MVIMIENTO BANCARIO: "+  movimientoBancario.getTipoMovimientoBancario());
         super.insert(movimientoBancario);
     }
     
     @Override
     public boolean checkBalance(CuentaBancaria cuentaBancaria){
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE saldoTotal < 0 AND cuentaBancaria=?;");
+        Query query = session.createQuery("SELECT mb FROM MovimientoBancario mb WHERE mb.saldoTotal < 0 AND mb.cuentaBancaria=?");
         query.setInteger(0, cuentaBancaria.getIdCuentaBancaria());
+        List<MovimientoBancario> lista = query.list();
+         System.out.println(lista.size());       
         if(query.list().size()>0){
             return false;
         }else{
